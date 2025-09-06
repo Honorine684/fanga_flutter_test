@@ -1,4 +1,3 @@
-```markdown
 # 🚀 Flutter BaseApp
 
 **BaseApp** est un projet Flutter modulaire, structuré selon les principes du **Domain-Driven Design (DDD)**, intégrant **FVM**, **flutter_gen**, ainsi qu’une organisation rigoureuse du code basée sur `lib/src`.
@@ -24,8 +23,9 @@ Chaque couche a un rôle précis, ce qui permet une forte découplage, un test u
 
 ## 🧪 Tests
 
-- **Tests unitaires** sur les cas d’usage et entités du domaine.
-- **Tests d’intégration** pour valider le comportement global.
+- **Tests unitaires** sur les cas d’usage et entités du domaine (dossier `test/unit/`).
+- **Tests de widgets** pour la UI (dossier `test/widget/`).
+- **Tests d’intégration** pour valider le comportement global (dossier `test/integration/`).
 
 ```bash
 flutter test
@@ -41,6 +41,12 @@ flutter test
 - 🔗 **get_it** pour l’injection de dépendances
 - 🌐 **dio** pour la communication réseau
 - 📦 Architecture prête à l’emploi pour Firebase, REST, ou GraphQL
+- 🧩 **scripts/** pour automatiser les tâches courantes
+- 📝 **docs/** pour la documentation technique et les guides
+- 🧪 **samples/** pour des exemples de widgets/pages
+- 🔒 Gestion des secrets via `.env` (voir exemple dans `docs/`)
+- 🎨 Structure extensible pour la gestion des thèmes
+- 🛡️ CI/CD prêt à l’emploi (`.github/workflows/flutter_ci.yml`)
 
 ---
 
@@ -79,6 +85,12 @@ fvm flutter run
 | `domain/`           | Entités, Value Objects, Interfaces |
 | `infrastructure/`   | Implémentations concrètes (API, local, remote) |
 | `presentation/`     | UI, pages, gestion d’état |
+| `test/unit/`        | Tests unitaires |
+| `test/widget/`      | Tests de widgets |
+| `test/integration/` | Tests d’intégration |
+| `docs/`             | Documentation technique |
+| `scripts/`          | Scripts utilitaires |
+| `samples/`          | Exemples de widgets/pages |
 
 ---
 

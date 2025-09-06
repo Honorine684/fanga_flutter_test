@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,160 @@ class $LoginEventCopyWith<$Res>  {
 $LoginEventCopyWith(LoginEvent _, $Res Function(LoginEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [LoginEvent].
+extension LoginEventPatterns on LoginEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( Click value)?  click,TResult Function( EmailChanged value)?  emailChanged,TResult Function( PasswordChanged value)?  passwordChanged,TResult Function( Submit value)?  submit,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that);case Click() when click != null:
+return click(_that);case EmailChanged() when emailChanged != null:
+return emailChanged(_that);case PasswordChanged() when passwordChanged != null:
+return passwordChanged(_that);case Submit() when submit != null:
+return submit(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( Click value)  click,required TResult Function( EmailChanged value)  emailChanged,required TResult Function( PasswordChanged value)  passwordChanged,required TResult Function( Submit value)  submit,}){
+final _that = this;
+switch (_that) {
+case _Started():
+return started(_that);case Click():
+return click(_that);case EmailChanged():
+return emailChanged(_that);case PasswordChanged():
+return passwordChanged(_that);case Submit():
+return submit(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( Click value)?  click,TResult? Function( EmailChanged value)?  emailChanged,TResult? Function( PasswordChanged value)?  passwordChanged,TResult? Function( Submit value)?  submit,}){
+final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started(_that);case Click() when click != null:
+return click(_that);case EmailChanged() when emailChanged != null:
+return emailChanged(_that);case PasswordChanged() when passwordChanged != null:
+return passwordChanged(_that);case Submit() when submit != null:
+return submit(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( String buttonType)?  click,TResult Function( String value)?  emailChanged,TResult Function( String value)?  passwordChanged,TResult Function()?  submit,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started();case Click() when click != null:
+return click(_that.buttonType);case EmailChanged() when emailChanged != null:
+return emailChanged(_that.value);case PasswordChanged() when passwordChanged != null:
+return passwordChanged(_that.value);case Submit() when submit != null:
+return submit();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( String buttonType)  click,required TResult Function( String value)  emailChanged,required TResult Function( String value)  passwordChanged,required TResult Function()  submit,}) {final _that = this;
+switch (_that) {
+case _Started():
+return started();case Click():
+return click(_that.buttonType);case EmailChanged():
+return emailChanged(_that.value);case PasswordChanged():
+return passwordChanged(_that.value);case Submit():
+return submit();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( String buttonType)?  click,TResult? Function( String value)?  emailChanged,TResult? Function( String value)?  passwordChanged,TResult? Function()?  submit,}) {final _that = this;
+switch (_that) {
+case _Started() when started != null:
+return started();case Click() when click != null:
+return click(_that.buttonType);case EmailChanged() when emailChanged != null:
+return emailChanged(_that.value);case PasswordChanged() when passwordChanged != null:
+return passwordChanged(_that.value);case Submit() when submit != null:
+return submit();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -373,6 +526,136 @@ as Option<Either<AuthFailure, Unit>>,
 
 }
 
+
+/// Adds pattern-matching-related methods to [LoginState].
+extension LoginStatePatterns on LoginState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LoginState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _LoginState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LoginState value)  $default,){
+final _that = this;
+switch (_that) {
+case _LoginState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LoginState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _LoginState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String emailAddress,  String password,  bool showErrorMessages,  bool isSubmitting,  bool isSubmitable,  String clickType,  bool emailIsError,  bool passwordIsError,  bool? restartApp,  Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _LoginState() when $default != null:
+return $default(_that.emailAddress,_that.password,_that.showErrorMessages,_that.isSubmitting,_that.isSubmitable,_that.clickType,_that.emailIsError,_that.passwordIsError,_that.restartApp,_that.authFailureOrSuccessOption);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String emailAddress,  String password,  bool showErrorMessages,  bool isSubmitting,  bool isSubmitable,  String clickType,  bool emailIsError,  bool passwordIsError,  bool? restartApp,  Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)  $default,) {final _that = this;
+switch (_that) {
+case _LoginState():
+return $default(_that.emailAddress,_that.password,_that.showErrorMessages,_that.isSubmitting,_that.isSubmitable,_that.clickType,_that.emailIsError,_that.passwordIsError,_that.restartApp,_that.authFailureOrSuccessOption);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String emailAddress,  String password,  bool showErrorMessages,  bool isSubmitting,  bool isSubmitable,  String clickType,  bool emailIsError,  bool passwordIsError,  bool? restartApp,  Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?  $default,) {final _that = this;
+switch (_that) {
+case _LoginState() when $default != null:
+return $default(_that.emailAddress,_that.password,_that.showErrorMessages,_that.isSubmitting,_that.isSubmitable,_that.clickType,_that.emailIsError,_that.passwordIsError,_that.restartApp,_that.authFailureOrSuccessOption);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

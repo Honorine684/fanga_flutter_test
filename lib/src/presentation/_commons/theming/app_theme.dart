@@ -24,19 +24,40 @@ ThemeData buildAppThemeData(BuildContext context) {
         ),
       ),
     ),
-    visualDensity: VisualDensity.standard,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
     scaffoldBackgroundColor: Colors.white,
     primarySwatch: getMaterialColor(AppColors.primary),
+    primaryColor: AppColors.primary,
+    colorScheme: ColorScheme.light(
+      primary: AppColors.primary,
+      secondary: AppColors.secondary,
+      error: AppColors.error,
+      background: Colors.white,
+      surface: Colors.white,
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+      onError: Colors.white,
+      onBackground: Colors.black,
+      onSurface: Colors.black,
+    ),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(color: Colors.black),
       backgroundColor: Colors.white,
       elevation: 1.5,
       actionsIconTheme: IconThemeData(color: Colors.black),
+      titleTextStyle: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 55),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+        textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -46,6 +67,8 @@ ThemeData buildAppThemeData(BuildContext context) {
           side: const BorderSide(color: AppColors.primary, width: 1),
           borderRadius: BorderRadius.circular(10),
         ),
+        foregroundColor: AppColors.primary,
+        textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -54,10 +77,95 @@ ThemeData buildAppThemeData(BuildContext context) {
       fillColor: Colors.white,
       filled: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 18),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.primary, width: 2),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: AppColors.error, width: 2),
+        borderRadius: BorderRadius.circular(8),
+      ),
     ),
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       side: const BorderSide(width: 1),
+      fillColor: MaterialStateProperty.all(AppColors.primary),
+      checkColor: MaterialStateProperty.all(Colors.white),
     ),
+    cardTheme: CardTheme(
+      color: Colors.white,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      margin: const EdgeInsets.all(8),
+    ),
+    dividerTheme: const DividerThemeData(
+      color: Colors.grey,
+      thickness: 1,
+      space: 32,
+    ),
+    dialogTheme: DialogTheme(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      titleTextStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      contentTextStyle: const TextStyle(fontSize: 16),
+    ),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: AppColors.primary,
+      contentTextStyle: const TextStyle(color: Colors.white),
+      actionTextColor: AppColors.secondary,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primary,
+      foregroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    switchTheme: SwitchThemeData(
+      thumbColor: MaterialStateProperty.all(AppColors.primary),
+      trackColor: MaterialStateProperty.all(AppColors.primary.withOpacity(0.5)),
+    ),
+    sliderTheme: SliderThemeData(
+      activeTrackColor: AppColors.primary,
+      inactiveTrackColor: AppColors.primary.withOpacity(0.3),
+      thumbColor: AppColors.primary,
+      overlayColor: AppColors.primary.withOpacity(0.2),
+      valueIndicatorColor: AppColors.primary,
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: AppColors.primary,
+      unselectedLabelColor: Colors.grey,
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: AppColors.primary, width: 2),
+      ),
+      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+    ),
+    iconTheme: const IconThemeData(color: Colors.black),
+    splashColor: AppColors.primary.withOpacity(0.1),
+    highlightColor: AppColors.primary.withOpacity(0.05),
+    hoverColor: AppColors.primary.withOpacity(0.08),
+    focusColor: AppColors.primary.withOpacity(0.12),
+    errorColor: AppColors.error,
+    disabledColor: Colors.grey.shade400,
+    secondaryHeaderColor: AppColors.secondary,
+    // Ajoutez d'autres thèmes spécifiques si besoin
   );
+}
+
+// Exemple d'extension pour la gestion multi-thèmes
+class AppTheme {
+  static ThemeData light(BuildContext context) => buildAppThemeData(context);
+
+  static ThemeData dark(BuildContext context) => ThemeData.dark().copyWith(
+        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
+        primaryColor: AppColors.primary,
+        scaffoldBackgroundColor: Colors.black,
+      );
+
+  // Ajoutez ici d'autres thèmes personnalisés si besoin
 }

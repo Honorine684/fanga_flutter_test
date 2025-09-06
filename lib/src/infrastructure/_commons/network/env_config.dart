@@ -25,7 +25,7 @@ class EnvManager implements IEnvManager {
   static const emailEnv = 'env@app.com';
   static const envKey = 'ENV_KEY';
 
-  init({Environment? env}) async {
+  Future<void> init({Environment? env}) async {
     return _setEnvironment(env: env ?? await getEnvironment(), restart: false);
   }
 

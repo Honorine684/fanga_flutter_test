@@ -95,4 +95,17 @@ class SplashRouteArgs {
   String toString() {
     return 'SplashRouteArgs{key: $key, withDeepLink: $withDeepLink, fromLogout: $fromLogout}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SplashRouteArgs) return false;
+    return key == other.key &&
+        withDeepLink == other.withDeepLink &&
+        fromLogout == other.fromLogout;
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^ withDeepLink.hashCode ^ fromLogout.hashCode;
 }
