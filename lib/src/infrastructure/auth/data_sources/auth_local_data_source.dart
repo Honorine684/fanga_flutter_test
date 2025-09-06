@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-import 'package:baseapp/src/domain/auth/_commons/user/user.dart';
-import 'package:baseapp/src/infrastructure/_commons/network/user_session.dart';
-import 'package:baseapp/src/infrastructure/auth/dtos/auth_response/auth_response_dto.dart';
-import 'package:baseapp/src/infrastructure/auth/dtos/user/user_dto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../domain/auth/_commons/user/user.dart';
+import '../../_commons/network/user_session.dart';
+import '../dtos/auth_response/auth_response_dto.dart';
+import '../dtos/user/user_dto.dart';
 
 abstract class IAuthLocalDataSource {
   Future<bool> cacheUser(AuthResponseDto userDto);
@@ -23,7 +24,7 @@ class AuthLocalDataSource implements IAuthLocalDataSource {
 
   @override
   Future<bool> cacheUser(AuthResponseDto authResponseDto) async {
-    return await sharedPreferences.setString(
+    return sharedPreferences.setString(
       user,
       jsonEncode(authResponseDto.toJson()),
     );
@@ -31,13 +32,13 @@ class AuthLocalDataSource implements IAuthLocalDataSource {
 
   @override
   Future<bool> updateUser(User bAUser) async {
-    AuthResponseDto? userDto = await userSession.getUserDto();
+    final AuthResponseDto? userDto = await userSession.getUserDto();
     if (userDto == null) return false;
-    AuthResponseDto authResponseDto = AuthResponseDto(
+    final AuthResponseDto authResponseDto = AuthResponseDto(
       user: UserDto.fromDomain(bAUser),
       token: userDto.token,
     );
-    return await sharedPreferences.setString(
+    return sharedPreferences.setString(
       user,
       jsonEncode(authResponseDto.toJson()),
     );

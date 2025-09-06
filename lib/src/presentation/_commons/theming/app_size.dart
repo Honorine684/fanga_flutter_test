@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -12,6 +13,10 @@ class AppSize {
     double smallerThanMobileValue = 10.0,
     double largerThanTabletValue = 120.0,
   }) {
+    // Utilise webValue si on est sur le web
+    if (isWeb(context)) {
+      return webValue;
+    }
     return ResponsiveValue<double>(
       context,
       defaultValue: defaultValue,
@@ -19,7 +24,6 @@ class AppSize {
         Condition.equals(name: MOBILE, value: mobileValue),
         Condition.equals(name: TABLET, value: tabletValue),
         Condition.equals(name: DESKTOP, value: desktopValue),
-        Condition.equals(name: WEB, value: webValue),
         Condition.smallerThan(name: MOBILE, value: smallerThanMobileValue),
         Condition.largerThan(name: TABLET, value: largerThanTabletValue),
       ],
@@ -39,7 +43,7 @@ class AppSize {
   }
 
   static bool isWeb(BuildContext context) {
-    return ResponsiveBreakpoints.of(context).isWeb;
+    return kIsWeb;
   }
 
   static double screenWidth(BuildContext context) {
@@ -59,9 +63,10 @@ class AppSize {
   }
 
   static double responsivePadding(BuildContext context) {
-    if (isMobile(context)) return 8.0;
+    if (isWeb(context)) return 32.0;
+    if (isDesktop(context)) return 32.0;
     if (isTablet(context)) return 16.0;
-    if (isDesktop(context) || isWeb(context)) return 32.0;
+    if (isMobile(context)) return 8.0;
     return 12.0;
   }
 }

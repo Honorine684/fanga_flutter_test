@@ -10,11 +10,11 @@ class NetworkInfo implements INetworkInfo {
 
   @override
   Future<bool> checkConnection() async {
-    var connectivityResult = await (connectivity.checkConnectivity());
-    final userHasWifi = (connectivityResult.contains(ConnectivityResult.wifi));
-    final userHasMobileData = (connectivityResult.contains(
+    final connectivityResult = await connectivity.checkConnectivity();
+    final userHasWifi = connectivityResult.contains(ConnectivityResult.wifi);
+    final userHasMobileData = connectivityResult.contains(
       ConnectivityResult.mobile,
-    ));
+    );
     return userHasWifi || userHasMobileData;
   }
 }

@@ -9,4 +9,8 @@ class AppColors {
   static const lightGrey = Color(0xFFF0F0F0);
   static const facebook = Color(0xFF4460A0);
   static const google = Color(0XFF121217);
+  static const secondary = Color(0xFFFFC107);
+  static const error = Color(0xFFB00020);
+  static const black = Color(0xFF000000);
+  static const white = Color(0xFFFFFFFF);
 }

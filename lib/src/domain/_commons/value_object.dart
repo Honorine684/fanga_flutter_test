@@ -1,7 +1,7 @@
-import 'package:baseapp/src/domain/auth/value_objects/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/widgets.dart';
 
+import '../auth/value_objects/failures.dart';
 import 'errors.dart';
 
 @immutable

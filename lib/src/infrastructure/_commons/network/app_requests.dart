@@ -43,7 +43,7 @@ class AppRequests implements IAppRequests {
     Map<String, dynamic>? headers,
   }) async {
     final options = Options(headers: headers);
-    return await AppHttpService.getInstance().get(
+    return AppHttpService.getInstance().get(
       request,
       queryParameters: queryParameters,
       options: options,
@@ -89,8 +89,11 @@ class AppRequests implements IAppRequests {
     Map<String, dynamic>? body,
   }) async {
     final options = Options(headers: headers);
-    return AppHttpService.getInstance()
-        .put(request, options: options, data: body);
+    return AppHttpService.getInstance().put(
+      request,
+      options: options,
+      data: body,
+    );
   }
 
   @override
@@ -99,9 +102,6 @@ class AppRequests implements IAppRequests {
     Map<String, dynamic>? headers,
   }) async {
     final options = Options(headers: headers);
-    return AppHttpService.getInstance().delete(
-      request,
-      options: options,
-    );
+    return AppHttpService.getInstance().delete(request, options: options);
   }
 }

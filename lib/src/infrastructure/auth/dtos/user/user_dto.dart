@@ -1,5 +1,6 @@
-import 'package:baseapp/src/domain/auth/_commons/user/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../../domain/auth/_commons/user/user.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';
@@ -31,7 +32,7 @@ abstract class UserDto with _$UserDto {
 extension UserDtoX on UserDto {
   User toDomain() {
     return User(
-      id: id!,
+      id: id,
       lastName: lastName,
       firstName: firstName,
       email: email,
@@ -41,7 +42,7 @@ extension UserDtoX on UserDto {
 
   User user() {
     return User(
-      id: id!,
+      id: id,
       lastName: lastName,
       firstName: firstName,
       email: email,

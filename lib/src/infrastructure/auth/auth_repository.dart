@@ -1,13 +1,14 @@
-import 'package:baseapp/src/domain/auth/_commons/i_auth_repository.dart';
-import 'package:baseapp/src/domain/auth/value_objects/password.dart';
-import 'package:baseapp/src/domain/auth/value_objects/email_address.dart';
-import 'package:baseapp/src/domain/auth/failure/auth_failure.dart';
-import 'package:baseapp/src/infrastructure/_commons/exceptions.dart';
-import 'package:baseapp/src/infrastructure/_commons/network/network_info.dart';
-import 'package:baseapp/src/infrastructure/auth/data_sources/auth_local_data_source.dart';
-import 'package:baseapp/src/infrastructure/auth/data_sources/auth_remote_data_source.dart';
-import 'package:baseapp/src/infrastructure/auth/dtos/auth_response/auth_response_dto.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../domain/auth/_commons/i_auth_repository.dart';
+import '../../domain/auth/failure/auth_failure.dart';
+import '../../domain/auth/value_objects/email_address.dart';
+import '../../domain/auth/value_objects/password.dart';
+import '../_commons/exceptions.dart';
+import '../_commons/network/network_info.dart';
+import 'data_sources/auth_local_data_source.dart';
+import 'data_sources/auth_remote_data_source.dart';
+import 'dtos/auth_response/auth_response_dto.dart';
 
 class AuthRepository implements IAuthRepository {
   final INetworkInfo networkInfo;
@@ -68,7 +69,7 @@ class AuthRepository implements IAuthRepository {
   }) async {
     if (await networkInfo.checkConnection()) {
       try {
-        AuthResponseDto result = await remoteDataSource.login(
+        final AuthResponseDto result = await remoteDataSource.login(
           email: emailAddress.value.toOption().toNullable()!,
           password: password.value.toOption().toNullable()!,
         );
@@ -93,7 +94,7 @@ class AuthRepository implements IAuthRepository {
   }) async {
     if (await networkInfo.checkConnection()) {
       try {
-        AuthResponseDto result = await remoteDataSource.signUp(
+        final AuthResponseDto result = await remoteDataSource.signUp(
           email: emailAddress.value.toOption().toNullable()!,
           password: password.value.toOption().toNullable()!,
           firstName: firstName,

@@ -1,7 +1,8 @@
-import 'package:baseapp/src/domain/auth/failure/auth_failure.dart';
-import 'package:baseapp/src/domain/auth/value_objects/email_address.dart';
-import 'package:baseapp/src/domain/auth/value_objects/password.dart';
 import 'package:dartz/dartz.dart';
+
+import '../failure/auth_failure.dart';
+import '../value_objects/email_address.dart';
+import '../value_objects/password.dart';
 
 abstract class IAuthRepository {
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({

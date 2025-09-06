@@ -1,7 +1,8 @@
-import 'package:baseapp/src/presentation/_commons/theming/app_color.dart';
-import 'package:baseapp/src/presentation/_commons/theming/app_material_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'app_color.dart';
+import 'app_material_color.dart';
 
 ThemeData buildAppThemeData(BuildContext context) {
   return ThemeData(
@@ -28,17 +29,10 @@ ThemeData buildAppThemeData(BuildContext context) {
     scaffoldBackgroundColor: Colors.white,
     primarySwatch: getMaterialColor(AppColors.primary),
     primaryColor: AppColors.primary,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
-      error: AppColors.error,
-      background: Colors.white,
-      surface: Colors.white,
-      onPrimary: Colors.white,
       onSecondary: Colors.white,
-      onError: Colors.white,
-      onBackground: Colors.black,
-      onSurface: Colors.black,
     ),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(color: Colors.black),
@@ -64,7 +58,7 @@ ThemeData buildAppThemeData(BuildContext context) {
       style: OutlinedButton.styleFrom(
         minimumSize: const Size(0, 48),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: AppColors.primary, width: 1),
+          side: const BorderSide(color: AppColors.primary),
           borderRadius: BorderRadius.circular(10),
         ),
         foregroundColor: AppColors.primary,
@@ -78,21 +72,21 @@ ThemeData buildAppThemeData(BuildContext context) {
       filled: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 18),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.primary, width: 2),
+        borderSide: const BorderSide(color: AppColors.primary, width: 2),
         borderRadius: BorderRadius.circular(8),
       ),
       errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.error, width: 2),
+        borderSide: const BorderSide(color: AppColors.error, width: 2),
         borderRadius: BorderRadius.circular(8),
       ),
     ),
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      side: const BorderSide(width: 1),
-      fillColor: MaterialStateProperty.all(AppColors.primary),
-      checkColor: MaterialStateProperty.all(Colors.white),
+      side: const BorderSide(),
+      fillColor: WidgetStateProperty.all(AppColors.primary),
+      checkColor: WidgetStateProperty.all(Colors.white),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -103,54 +97,29 @@ ThemeData buildAppThemeData(BuildContext context) {
       thickness: 1,
       space: 32,
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      titleTextStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      titleTextStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+      ),
       contentTextStyle: const TextStyle(fontSize: 16),
     ),
-    snackBarTheme: SnackBarThemeData(
-      backgroundColor: AppColors.primary,
-      contentTextStyle: const TextStyle(color: Colors.white),
-      actionTextColor: AppColors.secondary,
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-    ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: AppColors.primary,
-      foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    ),
-    bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    ),
-    switchTheme: SwitchThemeData(
-      thumbColor: MaterialStateProperty.all(AppColors.primary),
-      trackColor: MaterialStateProperty.all(AppColors.primary.withOpacity(0.5)),
-    ),
-    sliderTheme: SliderThemeData(
-      activeTrackColor: AppColors.primary,
-      inactiveTrackColor: AppColors.primary.withOpacity(0.3),
-      thumbColor: AppColors.primary,
-      overlayColor: AppColors.primary.withOpacity(0.2),
-      valueIndicatorColor: AppColors.primary,
-    ),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: const TabBarThemeData(
       labelColor: AppColors.primary,
       unselectedLabelColor: Colors.grey,
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(color: AppColors.primary, width: 2),
       ),
-      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
     ),
     iconTheme: const IconThemeData(color: Colors.black),
-    splashColor: AppColors.primary.withOpacity(0.1),
-    highlightColor: AppColors.primary.withOpacity(0.05),
-    hoverColor: AppColors.primary.withOpacity(0.08),
-    focusColor: AppColors.primary.withOpacity(0.12),
-    errorColor: AppColors.error,
+    splashColor: AppColors.primary.withValues(alpha: 0.1),
+    highlightColor: AppColors.primary.withValues(alpha: 0.05),
+    hoverColor: AppColors.primary.withValues(alpha: 0.08),
+    focusColor: AppColors.primary.withValues(alpha: 0.12),
     disabledColor: Colors.grey.shade400,
     secondaryHeaderColor: AppColors.secondary,
     // Ajoutez d'autres thèmes spécifiques si besoin
@@ -162,10 +131,10 @@ class AppTheme {
   static ThemeData light(BuildContext context) => buildAppThemeData(context);
 
   static ThemeData dark(BuildContext context) => ThemeData.dark().copyWith(
-        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-        primaryColor: AppColors.primary,
-        scaffoldBackgroundColor: Colors.black,
-      );
+    textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
+    primaryColor: AppColors.primary,
+    scaffoldBackgroundColor: Colors.black,
+  );
 
   // Ajoutez ici d'autres thèmes personnalisés si besoin
 }

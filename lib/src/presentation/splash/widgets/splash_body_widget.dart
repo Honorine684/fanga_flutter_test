@@ -1,6 +1,7 @@
-import 'package:baseapp/src/presentation/_commons/theming/app_color.dart';
-import 'package:baseapp/src/presentation/_commons_widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../_commons/theming/app_color.dart';
+import '../../_commons_widgets/loading_widget.dart';
 
 class SplashBodyWidget extends StatelessWidget {
   const SplashBodyWidget({super.key});

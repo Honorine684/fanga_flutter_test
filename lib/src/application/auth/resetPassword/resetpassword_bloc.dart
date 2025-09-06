@@ -1,13 +1,14 @@
-import 'package:baseapp/src/domain/auth/_commons/i_auth_repository.dart';
-import 'package:baseapp/src/domain/auth/failure/auth_failure.dart';
-import 'package:baseapp/src/domain/auth/value_objects/email_address.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../domain/auth/_commons/i_auth_repository.dart';
+import '../../../domain/auth/failure/auth_failure.dart';
+import '../../../domain/auth/value_objects/email_address.dart';
+
+part 'resetpassword_bloc.freezed.dart';
 part 'resetpassword_event.dart';
 part 'resetpassword_state.dart';
-part 'resetpassword_bloc.freezed.dart';
 
 class ResetpasswordBloc extends Bloc<ResetpasswordEvent, ResetpasswordState> {
   IAuthRepository repository;
@@ -25,8 +26,8 @@ class ResetpasswordBloc extends Bloc<ResetpasswordEvent, ResetpasswordState> {
   }
 
   void _emailChanged(EmailChanged event, Emitter<ResetpasswordState> emit) {
-    String email = event.value;
-    EmailAddress emailAddress = EmailAddress(email);
+    final String email = event.value;
+    final EmailAddress emailAddress = EmailAddress(email);
     emit(
       state.copyWith(
         emailAddress: email,
@@ -36,7 +37,7 @@ class ResetpasswordBloc extends Bloc<ResetpasswordEvent, ResetpasswordState> {
     );
   }
 
-  void _submit(Submit event, Emitter<ResetpasswordState> emit) async {
+  Future<void> _submit(Submit event, Emitter<ResetpasswordState> emit) async {
     if (state.emailAddress.isEmpty) {
       emit(
         state.copyWith(

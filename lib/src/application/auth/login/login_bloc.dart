@@ -1,15 +1,16 @@
-import 'package:baseapp/src/domain/auth/_commons/i_auth_repository.dart';
-import 'package:baseapp/src/domain/auth/failure/auth_failure.dart';
-import 'package:baseapp/src/domain/auth/value_objects/email_address.dart';
-import 'package:baseapp/src/domain/auth/value_objects/password.dart';
-import 'package:baseapp/src/infrastructure/_commons/network/env_config.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../domain/auth/_commons/i_auth_repository.dart';
+import '../../../domain/auth/failure/auth_failure.dart';
+import '../../../domain/auth/value_objects/email_address.dart';
+import '../../../domain/auth/value_objects/password.dart';
+import '../../../infrastructure/_commons/network/env_config.dart';
+
+part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
-part 'login_bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   IAuthRepository repository;
@@ -27,8 +28,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _emailChanged(EmailChanged event, Emitter<LoginState> emit) {
     if (event.value.isEmpty) return;
-    String email = event.value;
-    EmailAddress emailAddress = EmailAddress(email);
+    final String email = event.value;
+    final EmailAddress emailAddress = EmailAddress(email);
     emit(
       state.copyWith(
         emailAddress: email,
@@ -40,7 +41,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _passwordChanged(PasswordChanged event, Emitter<LoginState> emit) {
     if (event.value.isEmpty) return;
-    String password = event.value;
+    final String password = event.value;
     emit(
       state.copyWith(
         password: password,
@@ -49,7 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
   }
 
-  void _submit(Submit event, Emitter<LoginState> emit) async {
+  Future<void> _submit(Submit event, Emitter<LoginState> emit) async {
     if (state.emailAddress.isEmpty || state.password.isEmpty) {
       emit(
         state.copyWith(

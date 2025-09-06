@@ -8,7 +8,7 @@ abstract class RequestHeaderInterceptor {
   dynamic requestInterceptor(RequestOptions options);
 }
 
-void _perforlInterceptor(
+Future<void> _performInterceptor(
   RequestOptions options,
   RequestInterceptorHandler handler,
   ContentType contentType,
@@ -28,9 +28,9 @@ void _perforlInterceptor(
 
   options.headers['Content-Type'] = optionHeaderContentType;
 
-  String? lang = await UserSession().getLocaleLanguage();
+  final String? lang = await UserSession().getLocaleLanguage();
   if (lang != null) {
-    String langSend = lang.split('_')[0];
+    final String langSend = lang.split('_')[0];
     options.headers['Accept-Language'] = langSend;
   }
 
@@ -43,20 +43,20 @@ void _perforlInterceptor(
 
 class RequestHeaderInterceptorJsonImpl extends InterceptorsWrapper {
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    return _perforlInterceptor(options, handler, ContentType.json);
+    return _performInterceptor(options, handler, ContentType.json);
   }
 }
 
 class RequestHeaderInterceptorFormUrlEncodeImpl extends InterceptorsWrapper {
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    return _perforlInterceptor(options, handler, ContentType.wwwFormUrlEncode);
+    return _performInterceptor(options, handler, ContentType.wwwFormUrlEncode);
   }
 }

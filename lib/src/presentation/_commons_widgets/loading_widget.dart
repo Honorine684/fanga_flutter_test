@@ -1,5 +1,6 @@
-import 'package:baseapp/src/presentation/_commons/theming/app_color.dart';
 import 'package:flutter/material.dart';
+
+import '../_commons/theming/app_color.dart';
 
 class LoadingWidget extends StatefulWidget {
   final double? height;

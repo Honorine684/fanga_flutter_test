@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:baseapp/src/presentation/_commons/route/app_router.gr.dart';
-import 'package:baseapp/src/presentation/_commons/theming/app_color.dart';
 import 'package:flutter/material.dart';
+
+import '../../../_commons/route/app_router.gr.dart';
+import '../../../_commons/theming/app_color.dart';
 
 class LoginBodyWidget extends StatefulWidget {
   const LoginBodyWidget({super.key});

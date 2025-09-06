@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:baseapp/src/domain/auth/_commons/user/user.dart';
-import 'package:baseapp/src/infrastructure/auth/dtos/auth_response/auth_response_dto.dart';
-import 'package:baseapp/src/infrastructure/auth/dtos/user/user_dto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../domain/auth/_commons/user/user.dart';
+import '../../auth/dtos/auth_response/auth_response_dto.dart';
+import '../../auth/dtos/user/user_dto.dart';
 
 const locaLang = 'benin_appart_local_lang';
 const devisesStore = 'devises_store';
@@ -16,15 +17,15 @@ class UserSession {
     init(sharedPreferences);
   }
 
-  void init(SharedPreferences? sharedPreferences) async {
+  Future<void> init(SharedPreferences? sharedPreferences) async {
     preferences = sharedPreferences ?? await SharedPreferences.getInstance();
   }
 
   Future<AuthResponseDto?> getUserDto() async {
     preferences = preferences ?? await SharedPreferences.getInstance();
-    String? authdtoStore = preferences?.getString(appUser);
+    final String? authdtoStore = preferences?.getString(appUser);
     if (authdtoStore == null) return null;
-    AuthResponseDto userDto = AuthResponseDto.fromJson(
+    final AuthResponseDto userDto = AuthResponseDto.fromJson(
       jsonDecode(authdtoStore),
     );
     return userDto;
@@ -32,9 +33,9 @@ class UserSession {
 
   Future<String?> getAuthToken() async {
     preferences = preferences ?? await SharedPreferences.getInstance();
-    String? authdtoStore = preferences?.getString(appUser);
+    final String? authdtoStore = preferences?.getString(appUser);
     if (authdtoStore == null) return null;
-    AuthResponseDto userDto = AuthResponseDto.fromJson(
+    final AuthResponseDto userDto = AuthResponseDto.fromJson(
       jsonDecode(authdtoStore),
     );
     return userDto.token;
@@ -42,9 +43,9 @@ class UserSession {
 
   Future<User?> getUser() async {
     preferences = preferences ?? await SharedPreferences.getInstance();
-    String? authdtoStore = preferences?.getString(appUser);
+    final String? authdtoStore = preferences?.getString(appUser);
     if (authdtoStore == null) return null;
-    AuthResponseDto userDto = AuthResponseDto.fromJson(
+    final AuthResponseDto userDto = AuthResponseDto.fromJson(
       jsonDecode(authdtoStore),
     );
     return userDto.user!.toDomain();

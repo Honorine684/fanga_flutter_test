@@ -1,6 +1,6 @@
-import 'package:baseapp/src/domain/_commons/value_object.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../_commons/value_object.dart';
 import 'failures.dart';
 import 'value_validators.dart';
 

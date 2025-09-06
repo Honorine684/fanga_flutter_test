@@ -1,6 +1,6 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flavor/flavor.dart' as flv;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum Environment { dev, stage, prod }
 
@@ -31,8 +31,8 @@ class EnvManager implements IEnvManager {
 
   @override
   Future<Environment?> getEnvironment() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? env = preferences.getString(envKey);
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    final String? env = preferences.getString(envKey);
     if (env == null) return defaultEnv;
     Environment? currentEnv;
     for (var e in Environment.values) {
@@ -57,7 +57,7 @@ class EnvManager implements IEnvManager {
     required Environment? env,
     required bool restart,
   }) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
     Map<String, dynamic> config = {};
     if (env == null) {
       env = defaultEnv;

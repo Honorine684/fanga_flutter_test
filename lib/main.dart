@@ -1,9 +1,10 @@
-import 'package:baseapp/src/infrastructure/_commons/network/env_config.dart';
-import 'package:baseapp/src/presentation/app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'injection_container.dart' as ic;
+import 'src/infrastructure/_commons/network/env_config.dart';
+import 'src/presentation/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

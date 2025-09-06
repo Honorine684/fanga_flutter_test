@@ -1,5 +1,6 @@
-import 'package:baseapp/src/domain/auth/_commons/user/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../user/user.dart';
 
 part 'auth_response.freezed.dart';
 

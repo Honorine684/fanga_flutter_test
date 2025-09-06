@@ -1,15 +1,16 @@
-import 'package:baseapp/src/domain/auth/_commons/i_auth_repository.dart';
-import 'package:baseapp/src/domain/auth/_commons/user_create/user_create.dart';
-import 'package:baseapp/src/domain/auth/failure/auth_failure.dart';
-import 'package:baseapp/src/domain/auth/value_objects/email_address.dart';
-import 'package:baseapp/src/domain/auth/value_objects/password.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../domain/auth/_commons/i_auth_repository.dart';
+import '../../../domain/auth/_commons/user_create/user_create.dart';
+import '../../../domain/auth/failure/auth_failure.dart';
+import '../../../domain/auth/value_objects/email_address.dart';
+import '../../../domain/auth/value_objects/password.dart';
+
+part 'register_bloc.freezed.dart';
 part 'register_event.dart';
 part 'register_state.dart';
-part 'register_bloc.freezed.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   IAuthRepository repository;
@@ -26,9 +27,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _fieldChanged(FieldChanged event, Emitter<RegisterState> emit) {
-    UserCreate userCreate = state.userCreate ?? UserCreate();
+    final UserCreate userCreate = state.userCreate ?? UserCreate();
     String? messageError;
-    String? value = event.value;
+    final String? value = event.value;
     if (value == null) return;
     switch (event.fieldKey) {
       case 'firstname':
@@ -117,7 +118,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     );
   }
 
-  void _submit(Submit event, Emitter<RegisterState> emit) async {
+  Future<void> _submit(Submit event, Emitter<RegisterState> emit) async {
     if (state.userCreate == null || !state.userCreate!.isvalid) {
       emit(
         state.copyWith(
@@ -161,7 +162,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
 
     Either<AuthFailure, Unit> failedOrSuccessResponse;
-    UserCreate? userCreate = state.userCreate;
+    final UserCreate? userCreate = state.userCreate;
 
     emit(state.copyWith(isSubmitting: true));
     failedOrSuccessResponse = await repository.signUp(

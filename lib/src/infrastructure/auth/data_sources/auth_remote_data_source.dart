@@ -1,13 +1,14 @@
 import 'dart:convert';
 
-import 'package:baseapp/src/infrastructure/_commons/exceptions.dart';
-import 'package:baseapp/src/infrastructure/_commons/network/app_http_service.dart';
-import 'package:baseapp/src/infrastructure/_commons/network/app_requests.dart';
-import 'package:baseapp/src/infrastructure/_commons/throw_error.dart';
-import 'package:baseapp/src/infrastructure/auth/dtos/auth_response/auth_response_dto.dart';
-import 'package:baseapp/src/infrastructure/auth/dtos/user/user_dto.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+
+import '../../_commons/exceptions.dart';
+import '../../_commons/network/app_http_service.dart';
+import '../../_commons/network/app_requests.dart';
+import '../../_commons/throw_error.dart';
+import '../dtos/auth_response/auth_response_dto.dart';
+import '../dtos/user/user_dto.dart';
 
 abstract class IAuthRemoteDataSource {
   Future<AuthResponseDto> signUp({
@@ -43,16 +44,16 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
     required lastName,
     required phone,
   }) async {
-    String request = '${AppHttpService.baseUrl}/account/';
-    var body = {
+    final String request = '${AppHttpService.baseUrl}/account/';
+    final body = {
       'email': email,
       'password': password,
       'first_name': firstName,
       'last_name': lastName,
       'phone': phone,
     };
-    Response response = await httpClient.postRequest(request, body: body);
-    return await _performResponse(response);
+    final Response response = await httpClient.postRequest(request, body: body);
+    return _performResponse(response);
   }
 
   @override
@@ -60,11 +61,14 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
     required String email,
     required String userId,
   }) async {
-    String request = '${AppHttpService.baseUrl}/account/$userId/';
-    var body = {'email': email};
-    Response response = await httpClient.patchRequest(request, body: body);
+    final String request = '${AppHttpService.baseUrl}/account/$userId/';
+    final body = {'email': email};
+    final Response response = await httpClient.patchRequest(
+      request,
+      body: body,
+    );
     if (response.statusCode == 200 || response.statusCode == 201) {
-      var data = json.encode(response.data);
+      final data = json.encode(response.data);
       return UserDto.fromJson(json.decode(data));
     } else {
       throw ServerException(errorThrow(response));
@@ -76,15 +80,15 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
-    String request = '${AppHttpService.baseUrl}/user/login';
-    var body = jsonEncode({'emailPhone': email, 'password': password});
-    Response response = await httpClient.postRequest(request, body: body);
-    return await _performResponse(response);
+    final String request = '${AppHttpService.baseUrl}/user/login';
+    final body = jsonEncode({'emailPhone': email, 'password': password});
+    final Response response = await httpClient.postRequest(request, body: body);
+    return _performResponse(response);
   }
 
   Future<AuthResponseDto> _performResponse(Response response) async {
     if (response.statusCode == 200 || response.statusCode == 201) {
-      var data = json.encode(response.data);
+      final data = json.encode(response.data);
       return AuthResponseDto.fromJson(json.decode(data));
     } else {
       throw ServerException(errorThrow(response));
@@ -93,10 +97,10 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
 
   @override
   Future<Unit> resetPassword({required String email}) async {
-    String request = '${AppHttpService.baseUrl}/password_reset/';
-    var body = jsonEncode({'email': email});
-    Response response = await httpClient.postRequest(request, body: body);
-    return await _performResetPasswordResponse(response);
+    final String request = '${AppHttpService.baseUrl}/password_reset/';
+    final body = jsonEncode({'email': email});
+    final Response response = await httpClient.postRequest(request, body: body);
+    return _performResetPasswordResponse(response);
   }
 
   Future<Unit> _performResetPasswordResponse(Response response) async {
@@ -113,12 +117,13 @@ class AuthRemoteDataSource implements IAuthRemoteDataSource {
     required String newPassword,
     required String userId,
   }) async {
-    String request = '${AppHttpService.baseUrl}/account/$userId/set_password/';
-    var body = jsonEncode({
+    final String request =
+        '${AppHttpService.baseUrl}/account/$userId/set_password/';
+    final body = jsonEncode({
       'old_password': oldPassword,
       'new_password': newPassword,
     });
-    Response response = await httpClient.putRequest(
+    final Response response = await httpClient.putRequest(
       request,
       body: json.decode(body),
     );

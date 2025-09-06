@@ -1,4 +1,4 @@
-import 'package:baseapp/src/domain/auth/value_objects/failures.dart';
+import '../auth/value_objects/failures.dart';
 
 class UnexpectedValueError extends Error {
   final ValueFailure valueFailure;
