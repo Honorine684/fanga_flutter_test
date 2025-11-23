@@ -3,55 +3,129 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app_color.dart';
 import 'app_material_color.dart';
+import 'app_size.dart';
+
+/// Extension pour accéder facilement au TextTheme
+///
+/// Usage:
+/// ```dart
+// ignore: lines_longer_than_80_chars
+/// Text('Hello', style: context.textTheme.bodyMedium?.copyWith(color: Colors.red))
+/// ```
+extension ThemeExtension on BuildContext {
+  TextTheme get textTheme => Theme.of(this).textTheme;
+  TextStyle? get bodyText => textTheme.bodyMedium;
+  TextStyle? get titleText => textTheme.titleMedium;
+  TextStyle? get headlineText => textTheme.headlineSmall;
+}
 
 ThemeData buildAppThemeData(BuildContext context) {
+  // Tailles responsive par défaut
+  final defaultBodySize = AppSize.getSizeSafe(
+    context: context,
+    mobileValue: 14,
+  );
+  final defaultTitleSize = AppSize.getSizeSafe(
+    context: context,
+    mobileValue: 16,
+  );
+  final defaultHeadlineSize = AppSize.getSizeSafe(
+    context: context,
+    mobileValue: 20,
+  );
+
   return ThemeData(
-    textTheme: GoogleFonts.robotoTextTheme(
+    textTheme: GoogleFonts.senTextTheme(
       Theme.of(context).textTheme.copyWith(
-        displayMedium: const TextStyle(
-          fontSize: 24,
+        // Titres principaux
+        displayLarge: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 36),
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+        ),
+        displayMedium: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 24),
           fontWeight: FontWeight.w600,
           color: AppColors.primary,
         ),
-        displaySmall: const TextStyle(
-          fontSize: 20,
+        displaySmall: TextStyle(
+          fontSize: defaultHeadlineSize,
           fontWeight: FontWeight.w600,
           color: Colors.black,
         ),
-        displayLarge: const TextStyle(
-          fontSize: 36,
+        // Headlines
+        headlineLarge: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 28),
           fontWeight: FontWeight.w600,
-          color: Colors.black,
+        ),
+        headlineMedium: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 22),
+          fontWeight: FontWeight.w600,
+        ),
+        headlineSmall: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 18),
+          fontWeight: FontWeight.w600,
+        ),
+        // Titles
+        titleLarge: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 18),
+          fontWeight: FontWeight.w500,
+        ),
+        titleMedium: TextStyle(
+          fontSize: defaultTitleSize,
+          fontWeight: FontWeight.w500,
+        ),
+        titleSmall: TextStyle(
+          fontSize: defaultBodySize,
+          fontWeight: FontWeight.w500,
+        ),
+        // Body (TAILLE PAR DÉFAUT pour Text())
+        bodyLarge: TextStyle(
+          fontSize: defaultTitleSize,
+          fontWeight: FontWeight.w400,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: defaultBodySize, // 14px mobile -> 18px tablet
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 12),
+          fontWeight: FontWeight.w400,
+        ),
+        // Labels
+        labelLarge: TextStyle(
+          fontSize: defaultBodySize,
+          fontWeight: FontWeight.w500,
+        ),
+        labelMedium: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 12),
+          fontWeight: FontWeight.w500,
+        ),
+        labelSmall: TextStyle(
+          fontSize: AppSize.getSizeSafe(context: context, mobileValue: 10),
+          fontWeight: FontWeight.w500,
         ),
       ),
     ),
-    visualDensity: VisualDensity.adaptivePlatformDensity,
+    visualDensity: VisualDensity.standard,
     scaffoldBackgroundColor: Colors.white,
     primarySwatch: getMaterialColor(AppColors.primary),
-    primaryColor: AppColors.primary,
-    colorScheme: const ColorScheme.light(
-      primary: AppColors.primary,
-      secondary: AppColors.secondary,
-      onSecondary: Colors.white,
-    ),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(color: Colors.black),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       elevation: 1.5,
       actionsIconTheme: IconThemeData(color: Colors.black),
-      titleTextStyle: TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-      ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        textStyle: const TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
+          color: AppColors.white,
+        ),
         minimumSize: const Size(double.infinity, 55),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
-        textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -61,80 +135,120 @@ ThemeData buildAppThemeData(BuildContext context) {
           side: const BorderSide(color: AppColors.primary),
           borderRadius: BorderRadius.circular(10),
         ),
-        foregroundColor: AppColors.primary,
-        textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: AppColors.primary),
+        borderRadius: BorderRadius.circular(8),
+      ),
       hintStyle: const TextStyle(fontSize: 12),
       fillColor: Colors.white,
       filled: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 18),
-      focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.error, width: 2),
-        borderRadius: BorderRadius.circular(8),
-      ),
+    ),
+    // indicatorColor: AppColors.primary,
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      // circularTrackColor: AppColors.primary,
+      // color: AppColors.primary,
+      refreshBackgroundColor: AppColors.white,
     ),
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       side: const BorderSide(),
-      fillColor: WidgetStateProperty.all(AppColors.primary),
-      checkColor: WidgetStateProperty.all(Colors.white),
     ),
-    cardTheme: CardThemeData(
-      color: Colors.white,
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      margin: const EdgeInsets.all(8),
+    expansionTileTheme: const ExpansionTileThemeData(
+      iconColor: AppColors.primary,
+      shape: RoundedRectangleBorder(),
     ),
-    dividerTheme: const DividerThemeData(
-      color: Colors.grey,
-      thickness: 1,
-      space: 32,
-    ),
-    dialogTheme: DialogThemeData(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      titleTextStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 18,
-      ),
-      contentTextStyle: const TextStyle(fontSize: 16),
-    ),
-    tabBarTheme: const TabBarThemeData(
-      labelColor: AppColors.primary,
-      unselectedLabelColor: Colors.grey,
-      indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(color: AppColors.primary, width: 2),
-      ),
-      labelStyle: TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-    ),
-    iconTheme: const IconThemeData(color: Colors.black),
-    splashColor: AppColors.primary.withValues(alpha: 0.1),
-    highlightColor: AppColors.primary.withValues(alpha: 0.05),
-    hoverColor: AppColors.primary.withValues(alpha: 0.08),
-    focusColor: AppColors.primary.withValues(alpha: 0.12),
-    disabledColor: Colors.grey.shade400,
-    secondaryHeaderColor: AppColors.secondary,
-    // Ajoutez d'autres thèmes spécifiques si besoin
   );
 }
 
-// Exemple d'extension pour la gestion multi-thèmes
-class AppTheme {
-  static ThemeData light(BuildContext context) => buildAppThemeData(context);
-
-  static ThemeData dark(BuildContext context) => ThemeData.dark().copyWith(
-    textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-    primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: Colors.black,
+InputDecoration fieldInputDecoration({
+  required BuildContext context,
+  String? hintText,
+  String? labelText,
+  Widget? suffixIcon,
+}) {
+  return InputDecoration(
+    hintText: hintText,
+    hintStyle: TextStyle(
+      overflow: TextOverflow.ellipsis,
+      fontWeight: FontWeight.w300,
+      fontSize: AppSize.getSize(context: context, mobileValue: 14),
+      color: AppColors.greyNav,
+    ),
+    labelText: labelText,
+    suffixIcon: suffixIcon == null
+        ? null
+        : Padding(
+            padding: EdgeInsets.all(
+              AppSize.getSize(context: context, mobileValue: 10),
+            ),
+            child: suffixIcon,
+          ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: AppColors.greyField),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    border: OutlineInputBorder(
+      borderSide: const BorderSide(color: AppColors.greyField),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: AppColors.primary),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: AppColors.greyField),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: AppColors.red),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: AppColors.red),
+      borderRadius: BorderRadius.circular(8),
+    ),
   );
+}
 
-  // Ajoutez ici d'autres thèmes personnalisés si besoin
+Widget dropDownHintText(BuildContext context, {required String hintText}) {
+  return Text(
+    hintText,
+    style: TextStyle(
+      overflow: TextOverflow.ellipsis,
+      fontWeight: FontWeight.w300,
+      fontSize: AppSize.getSize(context: context, mobileValue: 14),
+      color: AppColors.greyNav,
+    ),
+  );
+}
+
+InputDecoration readOnlyFieldInputDecoration({
+  required BuildContext context,
+  String? hintText,
+}) {
+  return InputDecoration(
+    hintText: hintText,
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(8),
+    ),
+    fillColor: AppColors.greyGestionTab,
+    hintStyle: TextStyle(
+      fontWeight: FontWeight.w300,
+      fontSize: AppSize.getSize(context: context, mobileValue: 14),
+    ),
+  );
+}
+
+TextStyle fieldTextStyle({required BuildContext context}) {
+  return TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: AppSize.getSize(context: context, mobileValue: 14),
+    color: AppColors.greyNav,
+  );
 }
