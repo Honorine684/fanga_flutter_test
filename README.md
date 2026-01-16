@@ -201,6 +201,8 @@ L'idée c'est de concevoir l'app comme si le réseau était toujours mauvais :
 
 Comme ça, que tu sois à Abidjan avec la 4G ou dans un village avec du Edge qui coupe, l'expérience reste fluide.
 
+### Important 
+ J'ai essayé de compiler la base code mais je n'ai que des erreurs j'ai fait des recherches et finalement et j'en suis arrivé à la conclusion que il fallait recréér un nouveau projet parce que le graddle était trop cassé .C'est pour cela le contenu des fichiers n'a pas été implémenté.
 ---
 
 **Honorine - Janvier 2026**
